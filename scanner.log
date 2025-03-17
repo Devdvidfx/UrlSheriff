@@ -2,3 +2,16 @@
 2025-03-11 20:49:14,678 - INFO - Varredura concluída para https://netflix.com
 2025-03-11 20:57:57,138 - INFO - Varredura concluída para https://www.speedtest.net/pt
 2025-03-11 20:58:39,579 - INFO - Varredura concluída para https://www.serasa.com.br/limpa-nome-online/?gad_source=1&gclid=CjwKCAjwvr--BhB5EiwAd5YbXlumOle0KhHyNNODgc10SzDwfytjIH-nAaQrCov1XqbhoAMav-uIIRoCnSoQAvD_BwE
+2025-03-16 18:51:58,428 - INFO - Varredura concluída para https://github.com/Devdvidfx/UrlSheriff
+2025-03-16 18:58:18,623 - ERROR - Erro ao acessar https://www.redeuniforca.com.br/: 406 Client Error: Not Acceptable for url: https://www.redeuniforca.com.br/
+2025-03-16 18:58:25,343 - ERROR - Erro ao acessar https://www.redeuniforca.com.br: 406 Client Error: Not Acceptable for url: https://www.redeuniforca.com.br/
+2025-03-16 18:59:17,042 - ERROR - Erro ao acessar https://www.redeuniforca.com.br/: 406 Client Error: Not Acceptable for url: https://www.redeuniforca.com.br/
+2025-03-16 19:28:22,161 - ERROR - Erro ao acessar https://chat.deepseek.com/: 403 Client Error: Forbidden for url: https://chat.deepseek.com/
+2025-03-16 19:28:52,545 - INFO - Varredura concluída para https://www.englishexperts.com.br/
+2025-03-16 19:54:30,381 - INFO - Varredura concluída para https://pythonacademy.com.br/
+2025-03-16 20:35:47,645 - INFO - Consultando VirusTotal para a URL: https://google.com
+2025-03-16 20:35:48,866 - INFO - Análise concluída com status queued
+2025-03-16 20:36:00,366 - INFO - Varredura concluída para https://google.com
+2025-03-16 20:52:32,558 - INFO - Consultando VirusTotal para a URL: https://google.com
+2025-03-16 20:52:34,900 - INFO - Análise concluída com status completed
+2025-03-16 20:52:53,540 - INFO - Varredura concluída para https://google.com
