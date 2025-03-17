@@ -1,48 +1,56 @@
-import os
-import tkinter as tk
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning, module='Wappalyzer')
 import webbrowser
-from tkinter import Tk, Label, Entry, Button, scrolledtext, WORD, Frame, Menu, filedialog, messagebox, \
-    Toplevel
+import time
+from tkinter import Tk, ttk, Label, Entry, Button, scrolledtext, WORD, Frame, Menu, filedialog, Toplevel
 from tkinter.filedialog import asksaveasfilename
 
-from .scanner import executar_varredura, verificar_links_externos
-from .utils import adicionar_https, limpar_resultados
+from .scanner import *
+from .utils import *
 
+
+def criar_botao_limpar(txt_widget):
+    return Button(janela, text="Limpar", command=lambda: limpar_resultados(txt_widget))
 
 def start_interface():
     # Cria a janela principal
     janela = Tk()
-
     janela.title('Ferramenta de Varredura de Sites - Dev: Davi Felipe')
     janela.geometry('800x600')
-
-    label = tk.Label()
-    label.pack()
 
     # Cria um frame principal para organizar a interface
     frame_principal = Frame(janela)
     frame_principal.pack(fill="both", expand=True, padx=10, pady=10)
 
-    # Cria um frame para a entrada de URL e os botões principais
+    # Frame para a entrada da URL e botões principais
     frame_input = Frame(frame_principal)
-    frame_input.pack(fill="x", pady=10)
+    frame_input.pack(fill="x", pady=10, expand=True)
 
-    # Cria um rótulo para a entrada da URL
+    # Rótulo e campo de entrada para a URL
     lbl1 = Label(frame_input, text='Insira a URL do site')
     lbl1.pack(side="left", padx=10)
 
-    # Cria uma entrada para a URL do site
     entry = Entry(frame_input, width=40, font=("Arial", 12))
     entry.pack(side="left", padx=10)
 
-    # Adiciona evento para adicionar "https://" automaticamente
     entry.bind("<Return>", lambda event: adicionar_https(event, entry))
+
+    # Barra de progresso
+    progress = ttk.Progressbar(frame_principal, orient="horizontal", length=300, mode="determinate")
+    progress.pack(pady=10)
 
     # Função para iniciar a varredura
     def start_scan():
-        executar_varredura(entry.get(), txt)
         btn_executar.config(state="disabled")
         btn_parar.config(state="normal")
+        progress.config(value=0, maximum=100)  # Resetando a barra
+        for i in range(100):  # Simula o progresso
+            progress.config(value=i)
+            janela.update_idletasks()  # Atualiza a interface
+            # Simulação de trabalho (substitua isso pelo código real de varredura)
+            time.sleep(0.1)
+        executar_varredura(entry.get(), txt)
 
     # Função para parar a varredura
     def stop_scan():
@@ -63,7 +71,7 @@ def start_interface():
 
     # Cria um frame para os resultados da varredura
     frame_resultados = Frame(frame_principal)
-    frame_resultados.pack(fill="both", expand=True)
+    frame_resultados.pack(fill="both", expand=True, pady=10)
 
     # Cria uma área de texto para exibir os resultados
     txt = scrolledtext.ScrolledText(frame_resultados, wrap=WORD, font=("Arial", 12))
@@ -74,8 +82,8 @@ def start_interface():
     def limpar():
         limpar_resultados(txt)
 
-    def verificar_links():
-        verificar_links_externos(entry.get(), txt)
+    def verificar_links(txt_widget=None):
+        verificar_links_externos(entry.get(), txt_widget)
 
     def salvar():
         salvar_resultados(txt)
@@ -83,16 +91,16 @@ def start_interface():
     """Opção Arquivo"""
 
     def abrir_arquivo():
-        filename = filedialog.askopenfilename(defaultextension=".txt",
-                                              filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
-        if filename:
-            try:
+        try:
+            filename = filedialog.askopenfilename(defaultextension=".txt",
+                                                  filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
+            if filename:
                 with open(filename, 'r') as file:
                     conteudo = file.read()
                     txt.delete(1.0, "end")  # Limpa o conteúdo atual
                     txt.insert("1.0", conteudo)  # Insere o conteúdo do arquivo na área de texto
-            except Exception as e:
-                messagebox.showerror("Erro", f"Erro ao abrir o arquivo: {e}")
+        except Exception as e:
+            messagebox.showerror("Erro", f"Erro ao abrir o arquivo: {str(e)}")
 
     """Opção Compartilhar"""
 
@@ -161,7 +169,7 @@ def start_interface():
     "Funções para as Prefências"
 
     # Funções para Preferências
-    def alterar_diretorio_salvamento():
+    def alterar_diretorio_salvamento(diretoriorio=None):
         # Lógica para o usuário selecionar o diretório onde os arquivos serão salvos
         diretorio = asksaveasfilename(title="Escolha o diretório de salvamento")
         if diretorio:
@@ -183,6 +191,11 @@ def start_interface():
             janela.option_add('*TButton*highlightThickness', 3)
             janela.option_add('*font', ('Arial', 12))
             janela.option_add('theme', 'dark')
+            # Alterar fundo e cor do botão
+            for widget in frame_principal.winfo_children():
+                if isinstance(widget, Button):
+                    widget.config(bg="darkred", fg="white")
+            print("Tema alternado para escuro.")
         else:
             janela.tk_setPalette(background='#ffffff', foreground='#000000')
             janela.option_add('*TButton*highlightBackground', '#DDDDDD')
@@ -190,36 +203,40 @@ def start_interface():
             janela.option_add('*TButton*highlightThickness', 3)
             janela.option_add('*font', ('Arial', 12))
             janela.option_add('theme', 'light')
-        print("Tema alternado.")
+            # Alterar fundo e cor do botão
+            for widget in frame_principal.winfo_children():
+                if isinstance(widget, Button):
+                    widget.config(bg="green", fg="white")
+            print("Tema alternado para claro.")
 
     def alterar_cor_fundo():
-        def aplicar_cor():
+        def aplicar_cor(cor):
             janela.configure(bg=cor)
             print(f"Cor de fundo alterada para {cor}.")
             top.destroy()
 
-        top = Toplevel()
+        top = Toplevel(janela)
         top.title("Escolher Cor de Fundo")
 
         label = Label(top, text="Escolha a cor de fundo:")
         label.pack(pady=10)
 
-        cores = ['#ffffff', '#f0f0f0', '#000000', '#2e2e2e', '#add8e6']
+        cores = ['#ffffff', '#f0f0f0', '#000000', '#2e2e2e', '#add8e6', '#ff6347', '#90ee90']
 
         for cor in cores:
             button = Button(top, text=cor, command=lambda cor=cor: aplicar_cor(cor))
             button.pack(pady=5)
 
-    # Função para alterar o tamanho da fonte (CORRIGIDA)
+    # Função única para alterar o tamanho da fonte
     def alterar_tamanho_fonte():
         def aplicar_tamanho(tamanho):
-            # Altera a fonte globalmente para todos os widgets
             janela.option_add("*font", ("Arial", tamanho))  # Usando a janela principal
             print(f"Tamanho da fonte alterado para {tamanho}.")
             top.destroy()
 
         top = Toplevel(janela)  # Use a janela principal como parent
         top.title("Escolher Tamanho da Fonte")
+        top.geometry("200x250")
 
         Label(top, text="Escolha o tamanho da fonte:").pack(pady=10)
 
@@ -266,23 +283,22 @@ def start_interface():
     menu_bar = Menu(janela)
     janela.config(menu=menu_bar)
 
+    # Menu Arquivo
+    menu_arquivo = Menu(menu_bar, tearoff=0)
+    menu_bar.add_cascade(label="Arquivo", menu=menu_arquivo)
+    menu_arquivo.add_command(label="Abrir", command=abrir_arquivo)
+    menu_arquivo.add_separator()
+    menu_arquivo.add_command(label="Salvar", command=salvar)
+
     # Menu Opções
     menu_opcoes = Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Opções", menu=menu_opcoes)
     menu_opcoes.add_command(label="Limpar Resultados", command=limpar)
     menu_opcoes.add_command(label="Verificar Links Externos", command=verificar_links)
-    menu_opcoes.add_command(label="Salvar Arquivo", command=salvar)
-
-    # Menu Arquivo
-    menu_arquivo = Menu(menu_bar, tearoff=0)
-    menu_bar.add_cascade(label="Arquivo", menu=menu_arquivo)
-    menu_arquivo.add_command(label="Abrir Arquivo", command=abrir_arquivo)
-    menu_arquivo.add_command(label="Compartilhar", command=compartilhar)
 
     # Menu Informações
     menu_info = Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Info", menu=menu_info)
-
     menu_info.add_command(label="Sobre", command=mostrar_sobre)
     menu_info.add_command(label="Ajuda", command=mostrar_ajuda)
     menu_info.add_command(label="Versão", command=mostrar_versao)
@@ -292,9 +308,8 @@ def start_interface():
     # Menu Configurações
     menu_config = Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Configurações", menu=menu_config)
-    menu_config.add_command(label="Preferências")
 
-    # Menu Aparência
+    # Submenu Aparência dentro de Configurações
     menu_aparencia = Menu(menu_config, tearoff=0)
     menu_config.add_cascade(label="Aparência", menu=menu_aparencia)
     menu_aparencia.add_command(label="Alterar Tema", command=alternar_tema)
