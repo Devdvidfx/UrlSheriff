@@ -1,17 +1,23 @@
-2025-03-11 20:40:56,778 - INFO - Varredura concluída para https://fast.com/pt/
-2025-03-11 20:49:14,678 - INFO - Varredura concluída para https://netflix.com
-2025-03-11 20:57:57,138 - INFO - Varredura concluída para https://www.speedtest.net/pt
-2025-03-11 20:58:39,579 - INFO - Varredura concluída para https://www.serasa.com.br/limpa-nome-online/?gad_source=1&gclid=CjwKCAjwvr--BhB5EiwAd5YbXlumOle0KhHyNNODgc10SzDwfytjIH-nAaQrCov1XqbhoAMav-uIIRoCnSoQAvD_BwE
-2025-03-16 18:51:58,428 - INFO - Varredura concluída para https://github.com/Devdvidfx/UrlSheriff
+2025-03-11 20:40:56,778 - INFO - Varredura concluï¿½da para https://fast.com/pt/
+2025-03-11 20:49:14,678 - INFO - Varredura concluï¿½da para https://netflix.com
+2025-03-11 20:57:57,138 - INFO - Varredura concluï¿½da para https://www.speedtest.net/pt
+2025-03-11 20:58:39,579 - INFO - Varredura concluï¿½da para https://www.serasa.com.br/limpa-nome-online/?gad_source=1&gclid=CjwKCAjwvr--BhB5EiwAd5YbXlumOle0KhHyNNODgc10SzDwfytjIH-nAaQrCov1XqbhoAMav-uIIRoCnSoQAvD_BwE
+2025-03-12 20:33:38,302 - ERROR - Erro ao acessar https://www.redeuniforca.com.br/: HTTPSConnectionPool(host='www.redeuniforca.com.br', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000018E734BB290>: Failed to resolve 'www.redeuniforca.com.br' ([Errno 11002] getaddrinfo failed)"))
+2025-03-12 20:34:30,323 - ERROR - Erro ao acessar https://redeuniforca.com.br: 406 Client Error: Not Acceptable for url: https://redeuniforca.com.br/
+2025-03-12 20:35:38,364 - ERROR - Erro ao acessar https://www.mercantilatacadao.com.br: HTTPSConnectionPool(host='www.mercantilatacadao.com.br', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000018E734BBC80>: Failed to resolve 'www.mercantilatacadao.com.br' ([Errno 11001] getaddrinfo failed)"))
+2025-03-12 20:36:47,177 - INFO - Varredura concluï¿½da para https://www.speedtest.net/pt
+2025-03-12 20:38:05,686 - INFO - Varredura concluï¿½da para https://www.xvideos.com/
+2025-03-12 20:39:34,943 - INFO - Varredura concluï¿½da para https://www.xnxx.com/
+2025-03-16 18:51:58,428 - INFO - Varredura concluï¿½da para https://github.com/Devdvidfx/UrlSheriff
 2025-03-16 18:58:18,623 - ERROR - Erro ao acessar https://www.redeuniforca.com.br/: 406 Client Error: Not Acceptable for url: https://www.redeuniforca.com.br/
 2025-03-16 18:58:25,343 - ERROR - Erro ao acessar https://www.redeuniforca.com.br: 406 Client Error: Not Acceptable for url: https://www.redeuniforca.com.br/
 2025-03-16 18:59:17,042 - ERROR - Erro ao acessar https://www.redeuniforca.com.br/: 406 Client Error: Not Acceptable for url: https://www.redeuniforca.com.br/
 2025-03-16 19:28:22,161 - ERROR - Erro ao acessar https://chat.deepseek.com/: 403 Client Error: Forbidden for url: https://chat.deepseek.com/
-2025-03-16 19:28:52,545 - INFO - Varredura concluída para https://www.englishexperts.com.br/
-2025-03-16 19:54:30,381 - INFO - Varredura concluída para https://pythonacademy.com.br/
+2025-03-16 19:28:52,545 - INFO - Varredura concluï¿½da para https://www.englishexperts.com.br/
+2025-03-16 19:54:30,381 - INFO - Varredura concluï¿½da para https://pythonacademy.com.br/
 2025-03-16 20:35:47,645 - INFO - Consultando VirusTotal para a URL: https://google.com
-2025-03-16 20:35:48,866 - INFO - Análise concluída com status queued
-2025-03-16 20:36:00,366 - INFO - Varredura concluída para https://google.com
+2025-03-16 20:35:48,866 - INFO - Anï¿½lise concluï¿½da com status queued
+2025-03-16 20:36:00,366 - INFO - Varredura concluï¿½da para https://google.com
 2025-03-16 20:52:32,558 - INFO - Consultando VirusTotal para a URL: https://google.com
-2025-03-16 20:52:34,900 - INFO - Análise concluída com status completed
-2025-03-16 20:52:53,540 - INFO - Varredura concluída para https://google.com
+2025-03-16 20:52:34,900 - INFO - Anï¿½lise concluï¿½da com status completed
+2025-03-16 20:52:53,540 - INFO - Varredura concluï¿½da para https://google.com
